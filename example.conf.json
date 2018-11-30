@@ -1,0 +1,56 @@
+[
+    {
+        "treePosition": "1",
+        "title": "host1",
+        "hostName": "host1.mycompany.com",
+        "disabled": false,
+        "userName": "user1",
+        "authMethod": 1,
+        "authPhrase": "example.pem"
+    },
+    {
+        "treePosition": "1.2",
+        "title": "host2",
+        "hostName": "192.168.1.2",
+        "disabled": false,
+        "userName": "user2",
+        "authMethod": 1,
+        "authPhrase": "example.pem"
+    },
+    {
+        "treePosition": "1.1.1",
+        "title": "host3",
+        "hostName": "host3.mycompany.com",
+        "disabled": false,
+        "userName": "user3",
+        "authMethod": 1,
+        "authPhrase": "example.pem"
+    },
+    {
+        "treePosition": "1.1.2",
+        "title": "host4",
+        "hostName": "host4.mycompany.com",
+        "disabled": false,
+        "userName": "user4",
+        "authMethod": 1,
+        "authPhrase": "example.pem"
+    },
+    {
+        "treePosition": "1.1.1.3",
+        "title": "host5",
+        "hostName": "host5.mycompany.com",
+        "disabled": true,
+        "userName": "user1",
+        "authMethod": 0,
+        "authPhrase": "myplaintextpassword"
+    },
+    {
+        "treePosition": "2.1",
+        "title": "host6",
+        "hostName": "host6.mycompany.com",
+        "disabled": false,
+        "userName": "user1",
+        "authMethod": 0,
+        "authPhrase": "myplaintextpassword"
+    }
+]
