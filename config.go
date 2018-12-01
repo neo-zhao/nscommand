@@ -4,7 +4,8 @@ for example:
 {
         "treePosition": "1.2.3",
         "title": "host1",
-        "hostName": "host1.mycompany.com", //could also be ip address "1.2.3.4"
+		"hostName": "host1.mycompany.com", //could also be ip address "1.2.3.4"
+		"port": "22"
 		"disabled": true
         "userName": "ec2_user",
         "authMethod": 1,
@@ -36,6 +37,7 @@ type sshConfig struct {
 	TreePosition   string               `json:"treePosition"` //denotes the position in the terminal tree; uses '.' as the seperator; for example, 1.2.3 means the node is in the third layer of a tree where 1 is the root, 1.2 is its parent, and 1.2.3 is the node itself
 	Title          string               `json:"title"`        //the window title
 	HostName       string               `json:"hostName"`     //could be either the ip address or the dns name
+	Port           string               `json:"port"`         //special the port in remote host
 	Disabled       bool                 `json:"disabled"`     //indicates whether this node is disabled or not; The node will not be included in the tree; disable some nodes to avoid creating a new file
 	UserName       string               `json:"userName"`     //the username
 	AuthMethod     AuthenticationMethod `json:"authMethod"`   //file key or password

@@ -2,7 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"net"
 	"strings"
+
+	"golang.org/x/crypto/ssh"
 )
 
 type terminalTreeNode struct {
@@ -112,6 +116,46 @@ func (treeNode *terminalTreeNode) toSlice() []*terminalTreeNode {
 	for i := range treeNode.children {
 		child := treeNode.children[i]
 		result = append(result, child.toSlice()...)
+	}
+
+	return result
+}
+
+func publicKeyFile(file string) ssh.AuthMethod {
+	buffer, err := ioutil.ReadFile(file)
+	if err != nil {
+		return nil
+	}
+
+	key, err := ssh.ParsePrivateKey(buffer)
+	if err != nil {
+		return nil
+	}
+	return ssh.PublicKeys(key)
+}
+
+//convert current node's configuration to a ssh client config
+func (treeNode *terminalTreeNode) toSSHClientConfig() *ssh.ClientConfig {
+	if treeNode.sc == nil {
+		return nil
+	}
+	var result *ssh.ClientConfig
+	switch treeNode.sc.AuthMethod {
+	case Password:
+		result = &ssh.ClientConfig{
+			User: treeNode.sc.UserName,
+			Auth: []ssh.AuthMethod{ssh.Password(treeNode.sc.AuthPhrase)},
+		}
+	case PrivateKey:
+		result = &ssh.ClientConfig{
+			User: treeNode.sc.UserName,
+			Auth: []ssh.AuthMethod{publicKeyFile(treeNode.sc.AuthPhrase)},
+			HostKeyCallback: func(hostname string, remote net.Addr, key ssh.PublicKey) error {
+				return nil
+			},
+		}
+	default:
+		return nil
 	}
 
 	return result
